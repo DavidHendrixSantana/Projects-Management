@@ -62,4 +62,16 @@ class AuthController extends Controller
 
     }
 
+    public function logout(){
+
+        //**@var User $user */
+        $user = Auth::user();
+        // Reverse the token that was used to authenticate the current request...
+        $user->currentAccessToekn()->delete();
+
+        return response([
+            'success' => true
+        ]);
+    }
+
 }
