@@ -1,6 +1,19 @@
 import {createStore} from "vuex"
 import axiosClient  from "../axios";
 
+const tmpProjects =[
+    {
+        id:1,
+        user_id:1,
+        title: 'Laravel Project',
+        slug: 'laravel-project',
+        status: 1,
+        description: 'New laravel test project',
+        created_at : '2022-10-26 14:30:00',
+        updated_at : '2022-10-26 14:30:00',
+    }
+]
+
 const store = createStore({
     state:{
         user:{

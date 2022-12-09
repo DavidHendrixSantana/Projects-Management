@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router"
 import { storeKey } from "vuex"
 import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
+import ProjectView from '../views/ProjectView.vue'
 import Register from '../views/Register.vue'
 import store from '../store'
 import DefaultLayout from '../components/DefaultLayout.vue'
@@ -17,6 +18,8 @@ const routes = [
     children:[
         {path:'/dashboard', name:'Dashboard', component:Dashboard},
         {path:'/projects', name:'Projects', component:Projects},
+        {path:'/projects/create',name: "ProjectCreate", component: ProjectView},
+        {path:'/projects/:id',name: "ProjectView", component: ProjectView},
     ]
 },
 {
