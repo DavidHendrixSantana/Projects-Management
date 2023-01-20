@@ -8,10 +8,22 @@ const tmpProjects =[
         title: 'Laravel Project',
         slug: 'laravel-project',
         status: 1,
+        image:'https://images.freeimages.com/vhq/images/previews/43c/leather-stamping-logo-mockup-2-397107.jpg',
         description: 'New laravel test project',
         created_at : '2022-10-26 14:30:00',
         updated_at : '2022-10-26 14:30:00',
-    }
+    },
+    {
+        id:2,
+        user_id:1,
+        title: 'Laravel Project',
+        slug: 'laravel-project',
+        status: 1,
+        image:'https://images.freeimages.com/vhq/images/previews/43c/leather-stamping-logo-mockup-2-397107.jpg',
+        description: 'New laravel test project',
+        created_at : '2022-10-26 14:30:00',
+        updated_at : '2022-10-26 14:30:00',
+    },
 ]
 
 const store = createStore({
@@ -19,7 +31,9 @@ const store = createStore({
         user:{
             data:{ },
             token:sessionStorage.getItem("TOKEN"),
-        }
+        },
+        projects:[...tmpProjects]
+        
        
     },
     getters:{},

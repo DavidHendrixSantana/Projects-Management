@@ -1,7 +1,7 @@
 <template>
 <page-component title="Dashboard">
 
-  Content goes here
+  Content goes heress
 </page-component>
 </template>
 

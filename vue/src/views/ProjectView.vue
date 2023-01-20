@@ -1,6 +1,6 @@
 <template>
-  <PageComponent>
-    View Or Create new Project
+  <PageComponent title="View Or Create new Project">
+    
   </PageComponent>
 </template>
 
