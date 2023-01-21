@@ -16,12 +16,13 @@ class StoreProjectRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'user_id'=>$this->user()->id
-        ]);
-    }
+    // protected function prepareForValidation()
+    // {
+    //     $this->merge([
+    //         'user_id'=>$this->user()->id,
+            
+    //     ]);
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -33,7 +34,9 @@ class StoreProjectRequest extends FormRequest
         return [
            'title'=>'required|string|max:200',
            'user_id'=>'exists:users,id',
-           'description'=>'nullabe|string'
+           'description'=>'nullable|string',
+           'status'=>'required'
+
         ];
     }
 }

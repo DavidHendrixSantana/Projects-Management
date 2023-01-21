@@ -2,7 +2,8 @@
   <PageComponent :title=" model.id ? model.title : 'Create Project'">
       <template v-slot:header>
     
-      <form @submit.prevent="saveSurvey">
+
+      <form @submit.prevent="saveProject">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
 
@@ -77,9 +78,9 @@
               Responsible
             </label>
             <div class="mt-1">
-              <select name="responsible" id="responsible" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              <select name="user_id" v-model="model.user_id" id="user_id" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 >
-                <option value="David">David</option>
+                <option value="1">David</option>
               </select>
             </div>
           </div>
@@ -103,7 +104,7 @@
 import store from "../store"
 import {ref} from "vue"
 import PageComponent from "../components/PageComponent.vue"
-import {useRoute} from "vue-router"
+import {routerKey, useRoute} from "vue-router"
 
 const route=useRoute()
 
@@ -111,10 +112,10 @@ const route=useRoute()
 //Create empty project
 let model= ref({
   title:"",
-  slug:"",
   image:null,
   description:null,
-  user_id:null
+  user_id:null,
+  status:1
 })
 
 if(route.params.id){
@@ -122,6 +123,17 @@ if(route.params.id){
     (p) => p.id === parseInt(route.params.id)
   )
 
+}
+
+
+
+function saveProject(){
+  store.dispatch("saveProject", model.value).then(({data})=>{
+      router.push({
+        name:"ProjectView",
+        params:{id:data.data.id}
+      })
+  })
 }
 
 </script>

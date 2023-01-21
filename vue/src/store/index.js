@@ -38,6 +38,26 @@ const store = createStore({
     },
     getters:{},
     actions:{
+        saveProject({commit}, project){
+            let response;
+            if(project.id){
+                console.log(project)
+                response = axiosClient
+                .put(`/projec/${project.id}`, project)
+                .then((res)=>{
+                    commit("updateProject", res.data)
+                    return res
+                })
+            }else{
+                response = axiosClient.post("/project", project).then((res)=>{
+                    commit("saveProject", res.data)
+                    return res
+
+                })
+            }
+            return response
+        },
+
         register({commit}, user){
 
             // Request with fectch 
@@ -81,6 +101,26 @@ const store = createStore({
 
     },
     mutations:{
+        saveProject: (state,project)=>{
+            state.projects = [...state.projects, project.data]
+        }
+           
+        
+        ,
+        updateProject: (state,project)=>{
+            state.projects = state.projects.map((p)=>{
+                if(p.id == project.data.id){
+                    return project.data
+                }
+                return p
+            })
+
+        }
+        
+        
+        ,
+
+
         logout: (state) =>{
             state.user.data = {};
             state.user.token= null;
