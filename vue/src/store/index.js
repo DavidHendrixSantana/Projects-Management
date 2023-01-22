@@ -32,18 +32,35 @@ const store = createStore({
             data:{ },
             token:sessionStorage.getItem("TOKEN"),
         },
+        currentProject:{
+            loading:false,
+            data:{}
+        },
         projects:[...tmpProjects]
         
        
     },
     getters:{},
     actions:{
+        getProject({commit}, id){
+            commit("setCurrentProjectLoading",true);
+            return axiosClient
+            .get(`/project/${id}`)
+            .then((res)=>{
+                commit("setCurrentProject",res.data)
+                commit("setCurrentProjectLoading",false)
+                return res
+            }).catch((err)=>{
+                commit("setCurrentProjectLoading", false)
+                throw err
+            })
+        },
         saveProject({commit}, project){
+            delete project.image_url
             let response;
             if(project.id){
-                console.log(project)
                 response = axiosClient
-                .put(`/projec/${project.id}`, project)
+                .put(`/project/${project.id}`, project)
                 .then((res)=>{
                     commit("updateProject", res.data)
                     return res
@@ -56,6 +73,13 @@ const store = createStore({
                 })
             }
             return response
+        },
+
+        deleteProject({commit},id){
+
+            return axiosClient
+            .delete(`/project/${id}`)
+
         },
 
         register({commit}, user){
@@ -103,9 +127,21 @@ const store = createStore({
     mutations:{
         saveProject: (state,project)=>{
             state.projects = [...state.projects, project.data]
-        }
-           
+        },
         
+        setCurrentProjectLoading: (state, loading)=>{
+            state.currentProject.loading = loading
+        },
+
+        // deleteProject:(state,project){
+
+
+        // },
+        
+        setCurrentProject:(state, project)=>{
+            state.currentProject.data=project.data
+
+        }
         ,
         updateProject: (state,project)=>{
             state.projects = state.projects.map((p)=>{
@@ -115,10 +151,7 @@ const store = createStore({
                 return p
             })
 
-        }
-        
-        
-        ,
+        }          ,
 
 
         logout: (state) =>{

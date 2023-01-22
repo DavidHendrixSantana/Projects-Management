@@ -33,6 +33,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
            'title'=>'required|string|max:200',
+           'image'=>'nullable|string',
            'user_id'=>'exists:users,id',
            'description'=>'nullable|string',
            'status'=>'required'

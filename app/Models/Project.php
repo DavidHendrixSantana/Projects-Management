@@ -12,7 +12,7 @@ class Project extends Model
     use HasFactory,HasSlug;
 
 
-    protected $fillable = ['user_id','title','description','slug','status'];
+    protected $fillable = ['user_id','title','description','slug','status','image'];
 
     // defining the slug function
 
