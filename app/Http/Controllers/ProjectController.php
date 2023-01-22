@@ -21,8 +21,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        return ProjectResource::collection(Project::where('user_id', $user->id)->paginate());
+        // $user = $request->user();
+        // dd($request);
+        return ProjectResource::collection(Project::all());
     }
 
     /**
@@ -73,13 +74,14 @@ class ProjectController extends Controller
         if(isset($data['image'])){
             $relativePath = $this->saveImage($data['image']);
             $data['image'] = $relativePath;
-        }
-
-        //if there is an old image, delete it
+                    //if there is an old image, delete it
         if($project->image){
             $absolutePath = public_path($project->image);
             File::delete($absolutePath);
         }
+        }
+
+
 
         $project->update($data);
         return new ProjectResource($project);

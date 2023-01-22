@@ -176,8 +176,8 @@ function onImageChoose(ev){
 function saveProject(){
   store.dispatch("saveProject", model.value).then(({data})=>{
       router.push({
-        name:"ProjectView",
-        params:{id:data.data.id}
+        name:"Projects",
+
       })
   })
 }

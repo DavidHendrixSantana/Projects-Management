@@ -1,30 +1,8 @@
+import axios from "axios";
 import {createStore} from "vuex"
 import axiosClient  from "../axios";
 
-const tmpProjects =[
-    {
-        id:1,
-        user_id:1,
-        title: 'Laravel Project',
-        slug: 'laravel-project',
-        status: 1,
-        image:'https://images.freeimages.com/vhq/images/previews/43c/leather-stamping-logo-mockup-2-397107.jpg',
-        description: 'New laravel test project',
-        created_at : '2022-10-26 14:30:00',
-        updated_at : '2022-10-26 14:30:00',
-    },
-    {
-        id:2,
-        user_id:1,
-        title: 'Laravel Project',
-        slug: 'laravel-project',
-        status: 1,
-        image:'https://images.freeimages.com/vhq/images/previews/43c/leather-stamping-logo-mockup-2-397107.jpg',
-        description: 'New laravel test project',
-        created_at : '2022-10-26 14:30:00',
-        updated_at : '2022-10-26 14:30:00',
-    },
-]
+
 
 const store = createStore({
     state:{
@@ -36,7 +14,10 @@ const store = createStore({
             loading:false,
             data:{}
         },
-        projects:[...tmpProjects]
+        projects:{
+            loading:false,
+            data:[]
+        }
         
        
     },
@@ -62,7 +43,7 @@ const store = createStore({
                 response = axiosClient
                 .put(`/project/${project.id}`, project)
                 .then((res)=>{
-                    commit("updateProject", res.data)
+                    // commit("updateProject", res.data)
                     return res
                 })
             }else{
@@ -82,9 +63,18 @@ const store = createStore({
 
         },
 
+        getProjects({commit}){
+            commit('setProjectsLoading', true)
+            return axiosClient.get("/project").then((res)=>{
+                commit('setProjectsLoading',false)
+                commit('setProjects',res.data)
+                return res
+            })
+        },
+
         register({commit}, user){
 
-            // Request with fectch 
+            // Request with fetch 
             // return fetch('http://localhost:8000/api/register',{
             //     headers:{
             //         "Content-Type": "application/json",
@@ -128,30 +118,33 @@ const store = createStore({
         saveProject: (state,project)=>{
             state.projects = [...state.projects, project.data]
         },
+        setProjectsLoading:(state, loading)=>{
+            state.projects.loading = loading
+        }
+        ,
         
         setCurrentProjectLoading: (state, loading)=>{
             state.currentProject.loading = loading
         },
 
-        // deleteProject:(state,project){
-
-
-        // },
-        
         setCurrentProject:(state, project)=>{
             state.currentProject.data=project.data
 
+        },
+        setProjects:(state, projects)=>{
+            state.projects.data=projects.data
+
         }
         ,
-        updateProject: (state,project)=>{
-            state.projects = state.projects.map((p)=>{
-                if(p.id == project.data.id){
-                    return project.data
-                }
-                return p
-            })
+        // updateProject: (state,project)=>{
+        //     state.projects = state.projects.map((p)=>{
+        //         if(p.id == project.data.id){
+        //             return project.data
+        //         }
+        //         return p
+        //     })
 
-        }          ,
+        // },
 
 
         logout: (state) =>{
