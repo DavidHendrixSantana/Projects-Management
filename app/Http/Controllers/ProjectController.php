@@ -59,6 +59,18 @@ class ProjectController extends Controller
 
        return new ProjectResource($project);
     }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function showForGuest(Project $project)
+    {
+
+       return new ProjectResource($project);
+    }
 
     /**
      * Update the specified resource in storage.

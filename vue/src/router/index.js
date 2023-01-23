@@ -4,12 +4,14 @@ import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import ProjectView from '../views/ProjectView.vue'
 import Register from '../views/Register.vue'
+import ProjectPublicView from '../views/ProjectPublicView.vue'
 import store from '../store'
 import DefaultLayout from '../components/DefaultLayout.vue'
 import AuthLayout from '../components/AuthLayout.vue'
 import Projects from '../views/Projects.vue'
 
 const routes = [
+
 {
     path: '/',
     redirect: '/dashboard',
@@ -42,6 +44,11 @@ const routes = [
     ]
 },
 
+{
+    path: '/view/project/:slug',
+    name: 'ProjectPublicView',
+    component: ProjectPublicView   
+},
 ]
 
 const router = createRouter({

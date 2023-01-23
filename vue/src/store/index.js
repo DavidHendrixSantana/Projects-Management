@@ -80,6 +80,17 @@ const store = createStore({
                 return res
             })
         },
+        getProjectBySlug({commit},slug){
+            commit("setCurrentProjectLoading", true)
+            return axiosClient
+            .get(`/project-by-slug/${slug}`)
+            .then((res)=>{
+                commit("setCurrentProject", res.data)
+                commit("setCurrentProjectLoading", false)
+
+            })
+
+        },
 
         register({commit}, user){
 

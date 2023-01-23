@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     
 });
+Route::get('/project-by-slug/{project:slug}',[ProjectController::class, 'showForGuest']);
 Route::resource('/project', ProjectController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
