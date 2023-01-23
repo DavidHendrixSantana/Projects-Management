@@ -16,7 +16,9 @@ const store = createStore({
         },
         projects:{
             loading:false,
+            links:[],
             data:[]
+            
         },
         notification:{
             show:false,
@@ -69,9 +71,10 @@ const store = createStore({
 
         },
 
-        getProjects({commit}){
+        getProjects({commit}, {url = null} ={}){
+            url = url || '/project'
             commit('setProjectsLoading', true)
-            return axiosClient.get("/project").then((res)=>{
+            return axiosClient.get(url).then((res)=>{
                 commit('setProjectsLoading',false)
                 commit('setProjects',res.data)
                 return res
@@ -122,7 +125,7 @@ const store = createStore({
     },
     mutations:{
         saveProject: (state,project)=>{
-            state.projects = [...state.projects, project.data]
+            state.projects.data = [...state.projects.data, project.data]
         },
         setProjectsLoading:(state, loading)=>{
             state.projects.loading = loading
@@ -138,6 +141,7 @@ const store = createStore({
 
         },
         setProjects:(state, projects)=>{
+            state.projects.links=projects.meta.links
             state.projects.data=projects.data
 
         }

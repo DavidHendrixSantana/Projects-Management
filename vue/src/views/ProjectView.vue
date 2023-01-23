@@ -84,6 +84,7 @@
               <select name="user_id" v-model="model.user_id" id="user_id" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 >
                 <option value="1">David</option>
+                <option value="2">Israel</option>
               </select>
             </div>
           </div>

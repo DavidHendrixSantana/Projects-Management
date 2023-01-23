@@ -23,7 +23,7 @@ class ProjectController extends Controller
     {
         // $user = $request->user();
         // dd($request);
-        return ProjectResource::collection(Project::all());
+        return ProjectResource::collection(Project::where('user_id','2')->paginate(5));
     }
 
     /**
