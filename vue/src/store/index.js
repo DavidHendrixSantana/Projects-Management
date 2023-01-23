@@ -88,6 +88,10 @@ const store = createStore({
                 commit("setCurrentProject", res.data)
                 commit("setCurrentProjectLoading", false)
 
+            }).catch((err)=>{
+                commit("setCurrentProjectLoading", false)
+                throw err
+
             })
 
         },
