@@ -14,7 +14,7 @@ class AddImgFieldProject extends Migration
     public function up()
     {
         Schema::table('projects', function($table){
-            $table->string('image', '150');
+            $table->string('image', '150')->nullable();
         });
     }
 
