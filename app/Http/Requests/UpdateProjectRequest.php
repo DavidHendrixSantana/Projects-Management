@@ -24,7 +24,7 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|string|max:200',
+            'title'=>'required|string|max:200|unique:projects,title',
             'image'=>'nullable|string',
             'user_id'=>'exists:users,id',
             'description'=>'nullable|string',

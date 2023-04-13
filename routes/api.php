@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DashboardController;
 
 
 header("Cache-Control: no-cache, must-revalidate");
@@ -32,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     
 });
+Route::get('/dashboard',[DashboardController::class, 'index']);
 Route::get('/project-by-slug/{project:slug}',[ProjectController::class, 'showForGuest']);
 Route::resource('/project', ProjectController::class);
 Route::post('/register', [AuthController::class, 'register']);

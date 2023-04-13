@@ -6,7 +6,10 @@
 </template>
 
 <script setup>
+import {useStore} from "vuex"
 import PageComponent from "../components/PageComponent.vue"
+
+
 
 </script>
 
